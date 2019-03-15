@@ -1,6 +1,4 @@
-
 from os.path import isfile  # , expanduser as opexpanduser, join as opjoin, dirname as opdirname
-
 from six import string_types, text_type
 
 
