@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/__init__.py" afterDir="false" />
+    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="Major project restructuring - most possibly defunct">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FanHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FanThread.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanThread.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fan.py" beforeDir="false" afterPath="$PROJECT_DIR$/foehn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/funcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foehn.py" beforeDir="false" afterPath="$PROJECT_DIR$/foehn.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +17,17 @@
       <file leaf-file-name="foehn.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/foehn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            <state relative-caret-position="510">
+              <caret line="144" column="19" lean-forward="true" selection-start-line="144" selection-start-column="19" selection-end-line="144" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_deamon.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_deamon.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -36,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/src/classes/FanThread.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2217">
-              <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+              <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -73,7 +73,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Deamonize" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -87,10 +87,12 @@
         <option value="$PROJECT_DIR$/tmp.py" />
         <option value="$PROJECT_DIR$/helpers.py" />
         <option value="$PROJECT_DIR$/FanThread.py" />
+        <option value="$PROJECT_DIR$/test_deamon.py" />
+        <option value="$PROJECT_DIR$/foehn.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-114" />
     <option name="y" value="-31" />
     <option name="width" value="1692" />
@@ -109,6 +111,11 @@
             <path>
               <item name="PyFanControl" type="b2602c69:ProjectViewProjectNode" />
               <item name="PyFanControl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PyFanControl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PyFanControl" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -140,7 +147,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.test_deamon">
     <configuration name="fan" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PyFanControl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,8 +166,31 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="test_deamon" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PyFanControl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_deamon.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.fan" />
+      <item itemvalue="Python.test_deamon" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_deamon" />
         <item itemvalue="Python.fan" />
         <item itemvalue="Python.fan" />
       </list>
@@ -233,14 +263,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552694135403</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Major project restructuring - most possibly defunct">
+      <created>1552697375480</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1552697375480</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="-28" width="1366" height="799" extended-state="6" />
+    <frame x="38" y="0" width="1325" height="771" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15661764" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16148597" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" weight="0.32867134" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -291,7 +328,8 @@
     <MESSAGE value="added comments to the most important method in the application" />
     <MESSAGE value="pycharm needed to change linux to win linebreaks. duh!" />
     <MESSAGE value="pycharm workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="pycharm workspace" />
+    <MESSAGE value="Major project restructuring - most possibly defunct" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major project restructuring - most possibly defunct" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -624,14 +662,21 @@
     <entry file="file://$PROJECT_DIR$/src/classes/FanThread.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2217">
-          <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_deamon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/foehn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        <state relative-caret-position="510">
+          <caret line="144" column="19" lean-forward="true" selection-start-line="144" selection-start-column="19" selection-end-line="144" selection-end-column="19" />
         </state>
       </provider>
     </entry>
