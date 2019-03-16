@@ -6,6 +6,7 @@ from src.lib.helpers import is_sequence, string_is_empty
 
 
 class FanThread(Thread):
+	app = None
 	debug = False
 	fan = None
 	interval = None
@@ -28,6 +29,7 @@ class FanThread(Thread):
 
 	def __init__(
 		self,
+		app,
 		debug, stopevent, fan, interval=10,
 		temps=[45, 55, 60, 75],
 		fan_startlevel=0,
@@ -36,6 +38,7 @@ class FanThread(Thread):
 		variable_fanspeeds=None
 	):
 		Thread.__init__(self)
+		self.app = app
 		self.debug = debug
 		self.stopevent = stopevent
 		self.fan = fan
@@ -81,9 +84,9 @@ class FanThread(Thread):
 			self.fan_cooldown_interval = fc
 			self.fan_cooldown_time = fct
 
-	def dbgwrite(self, mess):
+	def dbgwrite(self, msg):
 		if self.debug is True:
-			print(mess)
+			self.app.dbgwrite(msg)
 
 	def setfandutycycle(self, cycle):
 		if self.fan is not None:

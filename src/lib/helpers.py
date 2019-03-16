@@ -1,6 +1,6 @@
 from os.path import isfile  # , expanduser as opexpanduser, join as opjoin, dirname as opdirname
 from six import string_types, text_type
-
+from re import findall
 
 def is_string(var):
 	return isinstance(var, string_types)
@@ -12,6 +12,10 @@ def is_integer(var):
 
 def is_unicode(obj):
 	return isinstance(obj, text_type)
+
+
+def parse_sequence_str(seqstr):
+	list(map(lambda x: int(x), findall('\d+', seqstr)))
 
 
 def is_sequence(var):

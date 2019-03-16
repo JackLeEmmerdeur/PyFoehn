@@ -9,6 +9,7 @@ if pi is True:
 
 
 class FanHandler:
+	app = None
 	fanstarted = False
 	fan = None
 	destroyed = True
@@ -17,7 +18,8 @@ class FanHandler:
 	current_dutycycle = None
 	runsonpi = None
 
-	def __init__(self, dbg, gpioport, freq):
+	def __init__(self, app, dbg, gpioport, freq):
+		self.app = app
 		self.runsonpi = runs_on_pi()
 		self.gpioport = gpioport
 		self.dbg = dbg
@@ -31,8 +33,8 @@ class FanHandler:
 		self.destroyed = False
 
 	def dbgwrite(self, msg):
-		if self.dbg is True:
-			print(msg)
+		if self.app is not None:
+			self.app.dbgwrite(msg)
 
 	def startfan(self, default_dutycycle=0):
 		if self.runsonpi is True:
