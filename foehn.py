@@ -5,9 +5,10 @@ from threading import Event
 
 import click
 
-from FanHandler import FanHandler
-from FanThread import FanThread
-from helpers import file_exists, is_string, is_sequence, is_dict, is_integer
+from src.classes.FanHandler import FanHandler
+from src.classes.FanThread import FanThread
+from src.lib.helpers import file_exists, is_string, \
+	is_sequence, is_dict, is_integer
 
 exited_via_ctrl_c = False
 

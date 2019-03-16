@@ -1,6 +1,6 @@
 from time import sleep
 
-from funcs import runs_on_pi
+from src.lib.funcs import runs_on_pi
 
 pi = runs_on_pi()
 

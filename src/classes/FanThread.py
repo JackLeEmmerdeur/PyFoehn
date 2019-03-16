@@ -1,8 +1,8 @@
 from threading import Thread
 from time import time
 
-from funcs import get_soctemp, runs_on_pi
-from helpers import is_sequence, string_is_empty
+from src.lib.funcs import get_soctemp, runs_on_pi
+from src.lib.helpers import is_sequence, string_is_empty
 
 
 class FanThread(Thread):
@@ -29,7 +29,7 @@ class FanThread(Thread):
 	def __init__(
 		self,
 		debug, stopevent, fan, interval=10,
-			temps=[45, 55, 60, 75],
+		temps=[45, 55, 60, 75],
 		fan_startlevel=0,
 		fan_cooldown="5",
 		constant_fanspeed=None,
