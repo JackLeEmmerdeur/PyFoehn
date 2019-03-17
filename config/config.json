@@ -1,15 +1,18 @@
 {
   "general": {
-	"profile": "profile_1"
+	"profile": "profile_1",
+	"foreground": false,
+	"logconsole": true
   },
   "hardware": {
+	"disablefan": true,
 	"pwmgpio": 25
   },
   "profile_1": {
   	"debug": true,
 	"freq": 150,
 	"interval": 2,
-	"fanstartlevel": 2,
+	"fanstartlevel": 1,
 	"fancooldown": "35sec",
 	"_constant_speed": 100,
 	"variable_speeds": [
@@ -20,8 +23,8 @@
 	],
 	"temp_thresholds": [
 	  45,
-	  55,
-	  60,
+	  57,
+	  62,
 	  75
 	]
   }

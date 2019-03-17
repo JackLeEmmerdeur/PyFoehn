@@ -1,26 +1,32 @@
 from src.classes.App import App
 from daemonize import Daemonize
 import signal
+from src.lib.helpers import is_boolean, get_reformatted_exception
 
-globalapp = None
+appname = "PyFoehn"
+
+app = App("config/config.json", appname)
 
 
 def signal_handler(sig, frame):
 	print("You pressed Ctrl+C!'")
-	global globalapp
-	globalapp.exitapp()
+	global app
+	app.exitapp()
 
 
 signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 if __name__ == "__main__":
 
-	global globalapp
+	foreground = app.config.get_value("general", "foreground")
 
-	globalapp = App("config/config.json", "/tmp/test.log", __name__)
-
-	pid = "/tmp/test.pid"
-
-	daemon = Daemonize(app="PyFoehn", pid=pid, action=app.run)
-
-	daemon.start()
+	try:
+		daemon = Daemonize(
+			app=appname,
+			foreground=foreground if is_boolean(foreground) else False,
+			logger=app.logger, pid="/tmp/" + appname + ".pid", action=lambda: app.run()
+		)
+		daemon.start()
+	except Exception as e:
+		print(get_reformatted_exception("bla", e))

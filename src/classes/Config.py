@@ -3,24 +3,37 @@ from json import load
 
 
 class Config:
-	config = None
+	_config = None
 
 	def __init__(self, file):
-		self.config = Config.config_read(file)
+		self._config = Config.read(file)
 
 	@staticmethod
-	def config_get_profile_value(p, key):
+	def get_profile_value(p, key):
 		if is_dict(p) and key in p:
 			return p[key]
 		return None
 
-	def config_get_profile(self):
-		general = self.config["general"]
+	def get_value(self, *keychain):
+		last_item = None
+		if self._config:
+			for key in keychain:
+				if last_item is None:
+					if key in self._config:
+						last_item = self._config[key]
+					else:
+						break
+				else:
+					last_item = last_item[key]
+		return last_item
+
+	def get_profile(self):
+		general = self._config["general"]
 		profile = general["profile"]
-		return self.config[profile]
+		return self._config[profile]
 
 	@staticmethod
-	def config_read(file):
+	def read(file):
 		d = None
 		e1 = "Config has to contain key '{}'"
 		e2 = "Key '{}' has to contain key '{}'"

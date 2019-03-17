@@ -1,17 +1,37 @@
 import logging
+from sys import stdout
 
 
 class EasyLogger:
-	fh = None
+	_fhf = None
+	_fhc = None
+	_logger = None
 
-	def __init__(self, file, name):
+	def __init__(self, use_console_too, file, name):
+		self._logger = logging.getLogger(name)
+		self._logger.setLevel(logging.DEBUG)
+		self._logger.propagate = False
 
-		self.logger = logging.getLogger(name)
-		self.logger.setLevel(logging.DEBUG)
-		self.logger.propagate = False
+		self._fhf = logging.FileHandler(file, "w")
+		self._fhf.setLevel(logging.DEBUG)
+		self._logger.addHandler(self._fhf)
 
-		self.fh = logging.FileHandler(file, "w")
+		if use_console_too is True:
+			self._fhc = logging.StreamHandler(stdout)
+			self._fhc.setLevel(logging.DEBUG)
+			self._logger.addHandler(self._fhc)
 
-		self.fh.setLevel(logging.DEBUG)
+	def getfhf(self):
+		return self._fhf
 
-		self.logger.addHandler(self.fh)
+	def getfhc(self):
+		return self._fhc
+
+	def info(self, msg, *args, **kwargs):
+		self._logger.info(msg, *args, **kwargs)
+
+	def warning(self, msg, *args, **kwargs):
+		self._logger.warning(msg, *args, **kwargs)
+
+	def error(self, msg, *args, **kwargs):
+		self._logger.error(msg, *args, **kwargs)
