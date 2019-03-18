@@ -1,6 +1,8 @@
 from time import sleep
-
+from src.classes.FanConfig import FanConfig
 from src.lib.funcs import runs_on_pi
+from src.lib.helpers import is_integer
+
 
 pi = runs_on_pi()
 
@@ -9,32 +11,32 @@ if pi is True:
 
 
 class FanHandler:
-	app = None
+	fanconfig = None
+	""":type: FanConfig"""
+
 	fanstarted = False
 	fan = None
 	destroyed = True
-	dbg = False
-	gpioport = None
 	current_dutycycle = None
 	runsonpi = None
 
-	def __init__(self, app, dbg, gpioport, freq):
-		self.app = app
+	def __init__(self, fanconfig):
+		self.fanconfig = fanconfig
 		self.runsonpi = runs_on_pi()
-		self.gpioport = gpioport
-		self.dbg = dbg
 		self.dbgwrite("Try setup GPIO")
 		if self.runsonpi is True:
+			freq = self.fanconfig.config.get_profile_value("freq")
+			freq = freq if is_integer(freq) else 25
+			gpio = self.fanconfig.gpio
 			GPIO.setmode(GPIO.BCM)
-			GPIO.setup(gpioport, GPIO.OUT)
-			self.dbgwrite("Fan gpioport set to {}".format(gpioport))
-			self.fan = GPIO.PWM(gpioport, freq)
-		self.dbgwrite("Port frequency set to {}".format(freq))
+			GPIO.setup(gpio, GPIO.OUT)
+			self.dbgwrite("Fan gpioport set to {}".format(gpio))
+			self.fan = GPIO.PWM(gpio, freq)
+			self.dbgwrite("Port frequency set to {}".format(freq))
 		self.destroyed = False
 
-	def dbgwrite(self, msg):
-		if self.app is not None:
-			self.app.dbgwrite(msg)
+	def dbgwrite(self, msg, *args, **kwargs):
+		self.fanconfig.dbgwrite(msg, *args, **kwargs)
 
 	def startfan(self, default_dutycycle=0):
 		if self.runsonpi is True:

@@ -101,3 +101,20 @@ def get_reformatted_exception(msg, e):
 
 def file_exists(path):
 	return isfile(path)
+
+
+def get_dict_keychain(dictobj, *keychain):
+	last_item = None
+	if dictobj:
+		for key in keychain:
+			if last_item is None:
+				if key in dictobj:
+					last_item = dictobj[key]
+				else:
+					break
+			elif key in last_item:
+				last_item = last_item[key]
+			else:
+				break
+	return last_item
+

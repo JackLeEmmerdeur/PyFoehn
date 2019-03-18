@@ -2,7 +2,9 @@
   "general": {
 	"profile": "profile_1",
 	"foreground": false,
-	"logconsole": false
+	"logconsole": false,
+	"logfile": false,
+	"loggername": "PyFoehn"
   },
   "hardware": {
 	"disablefan": false,

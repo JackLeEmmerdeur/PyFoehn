@@ -1,36 +1,72 @@
-from src.lib.helpers import file_exists, is_string, is_dict
+from src.lib.helpers import file_exists, is_string, get_dict_keychain, is_boolean, is_integer, string_is_empty
 from json import load
 
 
 class Config:
 	_config = None
+	_profile = None
 
 	def __init__(self, file):
 		self._config = Config.read(file)
 
 	@staticmethod
-	def get_profile_value(p, key):
-		if is_dict(p) and key in p:
-			return p[key]
+	def _get_value_string(default_string, use_default_if_empty, strval):
+		if strval is None:
+			return default_string
+		elif not is_string(strval):
+			return default_string
+		elif string_is_empty(strval):
+			return default_string if use_default_if_empty else strval
+		else:
+			return strval
+
+	def get_profile_value(self, *keychain):
+		if self._profile is not None:
+			return get_dict_keychain(self._profile, *keychain)
+		return None
+
+	def get_profile_value_int(self, default_int, *keychain):
+		if self._profile is not None:
+			i = get_dict_keychain(self._profile, *keychain)
+			return i if is_integer(i) else default_int
+		return None
+
+	def get_profile_value_bool(self, default_bool, *keychain):
+		if self._profile is not None:
+			b = get_dict_keychain(self._profile, *keychain)
+			return b if is_boolean(b) else default_bool
+		return None
+
+	def get_profile_value_string(self, default_string, use_default_if_empty, *keychain):
+		if self._profile is not None:
+			s = get_dict_keychain(self._profile, *keychain)
+			return Config._get_value_string(default_string, use_default_if_empty, s)
 		return None
 
 	def get_value(self, *keychain):
-		last_item = None
-		if self._config:
-			for key in keychain:
-				if last_item is None:
-					if key in self._config:
-						last_item = self._config[key]
-					else:
-						break
-				else:
-					last_item = last_item[key]
-		return last_item
+		return get_dict_keychain(self._config, *keychain)
 
-	def get_profile(self):
-		general = self._config["general"]
-		profile = general["profile"]
-		return self._config[profile]
+	def get_value_bool(self, default_bool, *keychain):
+		v = self.get_value(*keychain)
+		return v if is_boolean(v) else default_bool
+
+	def get_value_int(self, default_int, *keychain):
+		v = self.get_value(*keychain)
+		return v if is_integer(v) else default_int
+
+	def get_value_string(self, default_string, use_default_if_empty, *keychain):
+		v = self.get_value(*keychain)
+		return Config._get_value_string(default_string, use_default_if_empty, v)
+
+	def select_profile(self):
+		if "general" in self._config:
+			general = self._config["general"]
+			if "profile" in general:
+				profile = general["profile"]
+				if profile in self._config:
+					self._profile = self._config[profile]
+					return self._profile
+		return None
 
 	@staticmethod
 	def read(file):

@@ -1,118 +1,107 @@
 from threading import Thread
 from time import time
-
+from src.classes.FanConfig import FanConfig
+from src.classes.FanHandler import FanHandler
 from src.lib.funcs import get_soctemp, runs_on_pi
-from src.lib.helpers import is_sequence, string_is_empty
+from src.lib.helpers import is_sequence, string_is_empty, is_integer
 
 
 class FanThread(Thread):
-	app = None
-	debug = False
 	fan = None
-	interval = None
-	temps = None
+	fanconfig = None
+	""":type: FanConfig"""
+
+	keep_fds = None
+	stopevent = None
 	pi = None
-	last_dutycycle = -1
 
-	constant_fan_speed = None
-	variable_fan_speeds = None
-
+	fan_last_dutycycle = -1
 	fan_started = False
-	fan_startlevel = None
 	fan_started_cooldown = False
-
 	fan_cooldown_interval = None
 	fan_cooldown_intervals_ticked = None
-
 	fan_cooldown_time = None
 	fan_cooldown_time_started = None
 
 	def __init__(
 		self,
-		app,
-		debug, stopevent, fan, interval=10,
-		temps=[45, 55, 60, 75],
-		fan_startlevel=0,
-		fan_cooldown="5",
-		constant_fanspeed=None,
-		variable_fanspeeds=None
+		fanconfig,
+		keep_fds,
+		stopevent
 	):
 		Thread.__init__(self)
-		self.app = app
-		self.debug = debug
+		self.fanconfig = fanconfig
+		self.keep_fds = keep_fds
 		self.stopevent = stopevent
-		self.fan = fan
-		self.fan_startlevel = fan_startlevel
-		self.interval = interval
-		self.temps = temps
 		self.pi = runs_on_pi()
-		self.constant_fan_speed = constant_fanspeed
 
-		if not is_sequence(temps) or len(temps) == 0:
-			raise Exception("Temperature thresholds are screwed")
+		vfs = self.fanconfig.variable_speeds
+		has_vfs = is_sequence(vfs) and len(vfs) > 0
 
-		has_vf = is_sequence(variable_fanspeeds) and len(variable_fanspeeds) > 0
-
-		if has_vf is True:
-			self.variable_fan_speeds = variable_fanspeeds
-		else:
-			self.variable_fan_speeds = None
-
-		if has_vf is True:
-			if len(variable_fanspeeds) != len(temps):
+		if has_vfs is True:
+			if len(vfs) != len(vfs):
 				raise Exception("The number of variable-fan-speeds do not match temperature-thresholds")
 
-		if string_is_empty(fan_cooldown):
-			self.fan_cooldown_interval = 5
-		else:
-			pos_sec = fan_cooldown.find("sec")
-			pos_min = fan_cooldown.find("min")
-			pos_hrs = fan_cooldown.find("hrs")
+		if not string_is_empty(self.fanconfig.fancooldown):
+			fcd = self.fanconfig.fancooldown
+			pos_sec = fcd.find("sec")
+			pos_min = fcd.find("min")
+			pos_hrs = fcd.find("hrs")
 
-			fc = None
-			fct = None
+			fancooldown_interval = None
+			fancooldown_time = None
 
 			if pos_sec > -1:
-				fct = int(fan_cooldown[0:pos_sec])
+				fancooldown_time = int(fcd[0:pos_sec])
 			elif pos_min > -1:
-				fct = int(fan_cooldown[0:pos_min]) * 60
+				fancooldown_time = int(fcd[0:pos_min]) * 60
 			elif pos_hrs > -1:
-				fct = int(fan_cooldown[0:pos_hrs]) * 3600
+				fancooldown_time = int(fcd[0:pos_hrs]) * 3600
 			else:
-				fc = int(fan_cooldown)
+				fancooldown_interval = int(fcd)
 
-			self.fan_cooldown_interval = fc
-			self.fan_cooldown_time = fct
+			self.fan_cooldown_interval = fancooldown_interval
+			self.fan_cooldown_time = fancooldown_time
 
-	def dbgwrite(self, msg):
-		if self.debug is True:
-			self.app.dbgwrite(msg)
+	def dbgwrite(self, msg, *args, **kwargs):
+		self.fanconfig.dbgwrite(msg, *args, **kwargs)
 
 	def setfandutycycle(self, cycle):
 		if self.fan is not None:
-			if self.last_dutycycle != cycle:
+			if self.fan_last_dutycycle != cycle:
 				self.dbgwrite("Set dutycycle {}".format(cycle))
 				self.fan.setdutycycle(cycle)
-				self.last_dutycycle = cycle
+				self.fan_last_dutycycle = cycle
+
+	def destroy_fan(self):
+		if self.fan is not None:
+			self.fan.destroy()
 
 	def run(self):
+
+		if self.fan is None and self.fanconfig.disablefan is False:
+			self.fan = FanHandler(self.fanconfig)
+			self.fan.startfan()
+
+		constant_fan_speed = self.fanconfig.config.get_profile_value_int(None, "constant_speed")
+		variable_fan_speeds = self.fanconfig.config.get_profile_value("variable_speeds")
+		has_constantspeed = is_integer(constant_fan_speed)
+		has_variablespeeds = False
+
+		if has_constantspeed is False:
+			# Not using constant-fan-cycle,
+			# so check for variable-fan-speeds
+			if variable_fan_speeds is not None:
+				# using variable-fan-speeds. jay.
+				has_variablespeeds = True
+
 		while not self.stopevent.wait(self.interval):
 			# Stop-Signal was not send yet, e.g. via CTRL-C
 			soctemp = get_soctemp(self.pi)
-			has_variablespeeds = False
-			has_constantspeed = self.constant_fan_speed is not None
-
-			if has_constantspeed is False:
-				# Not using constant-fan-cycle,
-				# so check for variable-fan-speeds
-				vfd = self.variable_fan_speeds
-				if vfd is not None:
-					# using variable-fan-speeds. jay.
-					has_variablespeeds = True
 
 			self.dbgwrite("Current Socket temperature={}".format(soctemp))
 
-			if soctemp < self.temps[0]:
+			if soctemp < self.fanconfig.temp_thresholds[0]:
 				# Temperature fell below the first
 				# temperature-control-point, which
 				# probably means that the socket
@@ -126,7 +115,7 @@ class FanThread(Thread):
 				# Fan is already running
 
 				if self.fan_started_cooldown is False and \
-						soctemp < self.temps[self.fan_startlevel]:
+						soctemp < self.fanconfig.temp_thresholds[self.fanconfig.fanstartlevel]:
 					# We're not in the cooldown phase (CP),
 					# but socket temperature has normalized,
 					# so start CP
@@ -154,7 +143,7 @@ class FanThread(Thread):
 						if self.fan_cooldown_intervals_ticked == self.fan_cooldown_interval:
 							# The interval-cooldown-ticker is zero...
 
-							if soctemp < self.temps[self.fan_startlevel]:
+							if soctemp < self.fanconfig.temp_thresholds[self.fan_startlevel]:
 								# Stop fan because current temperature is
 								# below the fan-startlevel-temperature again
 
@@ -179,7 +168,7 @@ class FanThread(Thread):
 						if seconds_passed >= self.fan_cooldown_time:
 							# Fan-cooldown-time has elapsed
 
-							if soctemp < self.temps[self.fan_startlevel]:
+							if soctemp < self.fanconfig.temp_thresholds[self.fan_startlevel]:
 								# Stop fan because current temperature is
 								# below the fan-startlevel-temperature again
 								self.setfandutycycle(0)
@@ -195,14 +184,14 @@ class FanThread(Thread):
 				# socket temperature reached one of the
 				# temperature-control-points
 
-				for index, temp in enumerate(self.temps):
+				for index, temp in enumerate(self.fanconfig.temp_thresholds):
 					if soctemp >= temp:
-						if index >= self.fan_startlevel:
+						if index >= self.fanconfig.fanstartlevel:
 							# The fan should be started if the
 							# socket-temperature exeeds the
 							# temperature-control-point
 
-							self.dbgwrite("Fan start level {} reached({}deg)".format(self.fan_startlevel, temp))
+							self.dbgwrite("Fan start level {} reached({}deg)".format(self.fanconfig.fan_startlevel, temp))
 
 							dtindex = index
 
@@ -210,15 +199,15 @@ class FanThread(Thread):
 								# Set the speed to the corresponding
 								# variable-fan-speed of the current
 								# temperature-control-point
-								speed = self.variable_fan_speeds[dtindex]
+								speed = self.fanconfig.variable_speeds[dtindex]
 							elif has_constantspeed:
 								# Set the fan-speed to constant
-								speed = self.constant_fan_speed
+								speed = self.fanconfig.constant_speed
 							else:
 								# Set speed to the corresponding
 								# procentual value of the
 								# temperature-control-point
-								speed = ((dtindex + 1) * 100) / float(len(self.temps))
+								speed = ((dtindex + 1) * 100) / float(len(self.fanconfig.temp_thresholds))
 
 							self.setfandutycycle(speed)
 							self.fan_started = True
