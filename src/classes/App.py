@@ -100,6 +100,7 @@ class App:
 		self.dbgwrite("Exiting app")
 		if self.fan is not None:
 			self.fan.destroy()
+		self.logger.close()
 		sys.exit(0)
 
 	def dbgwrite(self, msg):
@@ -110,15 +111,13 @@ class App:
 		try:
 			self.thread.run()
 		except KeyboardInterrupt as e:
-			print("KeyboardInterrupt")
 			self.exitapp()
 		except Exception as e:
-			print("1")
 			get_reformatted_exception("", e)
 			self.exitapp()
 		finally:
-			print("2")
-			if self.exited_via_ctrl_c is True:
-				self.exitapp()
+			pass
+			# if self.exited_via_ctrl_c is True:
+			# 	self.exitapp()
 
 

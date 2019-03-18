@@ -97,3 +97,7 @@ def get_reformatted_exception(msg, e):
 			tb += "\r\n"
 		tb += "\t" + excfmtitem
 	return "{}\r\n{}".format(msg, tb)
+
+
+def file_exists(path):
+	return isfile(path)

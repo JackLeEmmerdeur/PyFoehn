@@ -2,10 +2,10 @@
   "general": {
 	"profile": "profile_1",
 	"foreground": false,
-	"logconsole": true
+	"logconsole": false
   },
   "hardware": {
-	"disablefan": true,
+	"disablefan": false,
 	"pwmgpio": 25
   },
   "profile_1": {

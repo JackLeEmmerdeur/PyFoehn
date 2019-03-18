@@ -21,6 +21,12 @@ class EasyLogger:
 			self._fhc.setLevel(logging.DEBUG)
 			self._logger.addHandler(self._fhc)
 
+	def close(self):
+		handlers = self._logger.handlers[:]
+		for handler in handlers:
+			handler.close()
+			self._logger.removeHandler(handler)
+
 	def getfhf(self):
 		return self._fhf
 

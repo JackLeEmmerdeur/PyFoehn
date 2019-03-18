@@ -96,7 +96,6 @@ class FanThread(Thread):
 				self.last_dutycycle = cycle
 
 	def run(self):
-
 		while not self.stopevent.wait(self.interval):
 			# Stop-Signal was not send yet, e.g. via CTRL-C
 			soctemp = get_soctemp(self.pi)

@@ -1,7 +1,8 @@
 from src.classes.App import App
-from daemonize import Daemonize
+from src.lib.helpers import get_reformatted_exception, file_exists, is_boolean
+from daemon import DaemonContext
 import signal
-from src.lib.helpers import is_boolean, get_reformatted_exception
+import lockfile
 
 appname = "PyFoehn"
 
@@ -9,24 +10,38 @@ app = App("config/config.json", appname)
 
 
 def signal_handler(sig, frame):
-	print("You pressed Ctrl+C!'")
+	print("Program exits")
 	global app
 	app.exitapp()
 
 
-signal.signal(signal.SIGINT, signal_handler)
-signal.signal(signal.SIGTERM, signal_handler)
-
 if __name__ == "__main__":
 
 	foreground = app.config.get_value("general", "foreground")
+	foreground = foreground if is_boolean(foreground) else False
 
 	try:
-		daemon = Daemonize(
-			app=appname,
-			foreground=foreground if is_boolean(foreground) else False,
-			logger=app.logger, pid="/tmp/" + appname + ".pid", action=lambda: app.run()
-		)
-		daemon.start()
+
+		if foreground is True:
+			signal.signal(signal.SIGINT, signal_handler)
+			signal.signal(signal.SIGTERM, signal_handler)
+			app.run()
+		else:
+			pidfile = "/tmp/" + appname + ".pid"
+
+			if file_exists(pidfile):
+				print("PID-File exists")
+				exit(1)
+
+			with DaemonContext(
+				signal_map={
+					signal.SIGTERM: signal_handler,
+					signal.SIGINT: signal_handler
+				},
+				pidfile=lockfile.FileLock(pidfile),
+				files_preserve=[app.logger.getfhf().stream],
+				stdout=app.logger.getfhf().stream
+			):
+				app.run()
 	except Exception as e:
 		print(get_reformatted_exception("bla", e))
