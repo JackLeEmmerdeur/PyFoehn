@@ -12,13 +12,13 @@ app = App("config/config.json", appname)
 def signal_handler(sig, frame):
 	print("Program exits")
 	global app
-	app.exitapp()
+	# app.exitapp()
+	app.stopevent.set()
 
 
 if __name__ == "__main__":
 
-	foreground = app.config.get_value("general", "foreground")
-	foreground = foreground if is_boolean(foreground) else False
+	foreground = app.fanconfig.config.get_value_bool(False, "general", "foreground")
 
 	try:
 
@@ -39,8 +39,8 @@ if __name__ == "__main__":
 					signal.SIGINT: signal_handler
 				},
 				pidfile=lockfile.FileLock(pidfile),
-				files_preserve=[app.logger.getfhf().stream],
-				stdout=app.logger.getfhf().stream
+				files_preserve=[app.fanconfig.logger.getfhf().stream],
+				stdout=app.fanconfig.logger.getfhf().stream
 			):
 				app.run()
 	except Exception as e:

@@ -1,9 +1,11 @@
 from threading import Thread
 from time import time
+from threading import Event
 from src.classes.FanConfig import FanConfig
 from src.classes.FanHandler import FanHandler
 from src.lib.funcs import get_soctemp, runs_on_pi
-from src.lib.helpers import is_sequence, string_is_empty, is_integer
+from src.lib.helpers import is_sequence, string_is_empty, is_integer, get_reformatted_exception
+from sys import exit
 
 
 class FanThread(Thread):
@@ -13,14 +15,15 @@ class FanThread(Thread):
 
 	keep_fds = None
 	stopevent = None
+	""":type: Event"""
+	stopevent_signaled = True
+	""":type: boolean"""
 	pi = None
 
 	fan_last_dutycycle = -1
 	fan_started = False
 	fan_started_cooldown = False
-	fan_cooldown_interval = None
 	fan_cooldown_intervals_ticked = None
-	fan_cooldown_time = None
 	fan_cooldown_time_started = None
 
 	def __init__(
@@ -41,27 +44,6 @@ class FanThread(Thread):
 		if has_vfs is True:
 			if len(vfs) != len(vfs):
 				raise Exception("The number of variable-fan-speeds do not match temperature-thresholds")
-
-		if not string_is_empty(self.fanconfig.fancooldown):
-			fcd = self.fanconfig.fancooldown
-			pos_sec = fcd.find("sec")
-			pos_min = fcd.find("min")
-			pos_hrs = fcd.find("hrs")
-
-			fancooldown_interval = None
-			fancooldown_time = None
-
-			if pos_sec > -1:
-				fancooldown_time = int(fcd[0:pos_sec])
-			elif pos_min > -1:
-				fancooldown_time = int(fcd[0:pos_min]) * 60
-			elif pos_hrs > -1:
-				fancooldown_time = int(fcd[0:pos_hrs]) * 3600
-			else:
-				fancooldown_interval = int(fcd)
-
-			self.fan_cooldown_interval = fancooldown_interval
-			self.fan_cooldown_time = fancooldown_time
 
 	def dbgwrite(self, msg, *args, **kwargs):
 		self.fanconfig.dbgwrite(msg, *args, **kwargs)
@@ -95,119 +77,135 @@ class FanThread(Thread):
 				# using variable-fan-speeds. jay.
 				has_variablespeeds = True
 
-		while not self.stopevent.wait(self.interval):
-			# Stop-Signal was not send yet, e.g. via CTRL-C
-			soctemp = get_soctemp(self.pi)
+		try:
+			while not self.stopevent.wait(self.fanconfig.interval):
+				# Stop-Signal was not send yet, e.g. via CTRL-C
+				soctemp = get_soctemp(self.pi)
 
-			self.dbgwrite("Current Socket temperature={}".format(soctemp))
+				self.dbgwrite("Current Socket temperature={}".format(soctemp))
 
-			if soctemp < self.fanconfig.temp_thresholds[0]:
-				# Temperature fell below the first
-				# temperature-control-point, which
-				# probably means that the socket
-				# doesn't need cooling so stop the fan
-				self.dbgwrite("Temperature below cool")
-				if self.fan_started is True:
-					self.setfandutycycle(0)
-					self.fan_started = False
+				if soctemp < self.fanconfig.temp_thresholds[0]:
+					# Temperature fell below the first
+					# temperature-control-point, which
+					# probably means that the socket
+					# doesn't need cooling so stop the fan
+					self.dbgwrite("Temperature below cool")
+					if self.fan_started is True:
+						self.setfandutycycle(0)
+						self.fan_started = False
 
-			elif self.fan_started is True:
-				# Fan is already running
+				elif self.fan_started is True:
+					# Fan is already running
 
-				if self.fan_started_cooldown is False and \
-						soctemp < self.fanconfig.temp_thresholds[self.fanconfig.fanstartlevel]:
-					# We're not in the cooldown phase (CP),
-					# but socket temperature has normalized,
-					# so start CP
+					if self.fan_started_cooldown is False and \
+							soctemp < self.fanconfig.temp_thresholds[self.fanconfig.fanstartlevel]:
+						# We're not in the cooldown phase (CP),
+						# but socket temperature has normalized,
+						# so start CP
 
-					self.fan_started_cooldown = True
-					self.dbgwrite("Back at Defcon 0")
+						self.fan_started_cooldown = True
+						self.dbgwrite("Back at Defcon 0")
 
-					if self.fan_cooldown_interval is not None:
-						# CP will use interval-mode
-						self.fan_cooldown_intervals_ticked = 0
-					else:
-						# CP will use time-period-mode
-						self.fan_cooldown_time_started = time()
-
-				if self.fan_started_cooldown is True:
-					# CP was started so check its stop-condition
-
-					if self.fan_cooldown_interval is not None:
-						# ---------- CP-Interval-Mode
-
-						self.dbgwrite("Current interval-cooldown-ticker={}".format(self.fan_cooldown_intervals_ticked))
-
-						# Check stop-condition:
-						# Ticks of check-interval reached max interval config-value
-						if self.fan_cooldown_intervals_ticked == self.fan_cooldown_interval:
-							# The interval-cooldown-ticker is zero...
-
-							if soctemp < self.fanconfig.temp_thresholds[self.fan_startlevel]:
-								# Stop fan because current temperature is
-								# below the fan-startlevel-temperature again
-
-								self.setfandutycycle(0)
-								self.fan_started = False
-								self.fan_started_cooldown = False
-
-							# Reset CP-cooldown-ticker. So either
-							# the fan was stopped above or it runs for
-							# another CP-cooldown-ticker round
+						if self.fanconfig.fan_cooldown_interval is not None:
+							# CP will use interval-mode
 							self.fan_cooldown_intervals_ticked = 0
 						else:
-							# Advance the CP-interval
-							self.fan_cooldown_intervals_ticked += 1
-					else:
-						# ---------- CP-Cooldown-Mode is used
+							# CP will use time-period-mode
+							self.fan_cooldown_time_started = time()
 
-						current_time = time()
-						seconds_passed = int(current_time - self.fan_cooldown_time_started)
-						self.dbgwrite("Current timer-cooldown seconds passed={}".format(seconds_passed))
+					if self.fan_started_cooldown is True:
+						# CP was started so check its stop-condition
 
-						if seconds_passed >= self.fan_cooldown_time:
-							# Fan-cooldown-time has elapsed
+						if self.fanconfig.fan_cooldown_interval is not None:
+							# ---------- CP-Interval-Mode
 
-							if soctemp < self.fanconfig.temp_thresholds[self.fan_startlevel]:
-								# Stop fan because current temperature is
-								# below the fan-startlevel-temperature again
-								self.setfandutycycle(0)
-								self.fan_started = False
-								self.fan_started_cooldown = False
+							self.dbgwrite("Current interval-cooldown-ticker={}".format(self.fan_cooldown_intervals_ticked))
 
-							# Reset cooldown-timer. So either the fan
-							# was stopped above or it runs for another
-							# cooldown-timer-round
-							self.fan_cooldown_time_started = current_time
-			else:
-				# Fan isn't running so determine if the
-				# socket temperature reached one of the
-				# temperature-control-points
+							# Check stop-condition:
+							# Ticks of check-interval reached max interval config-value
+							if self.fan_cooldown_intervals_ticked == self.fanconfig.fan_cooldown_interval:
+								# The interval-cooldown-ticker is zero...
 
-				for index, temp in enumerate(self.fanconfig.temp_thresholds):
-					if soctemp >= temp:
-						if index >= self.fanconfig.fanstartlevel:
-							# The fan should be started if the
-							# socket-temperature exeeds the
-							# temperature-control-point
+								if soctemp < self.fanconfig.temp_thresholds[self.fanconfig.fanstartlevel]:
+									# Stop fan because current temperature is
+									# below the fan-startlevel-temperature again
 
-							self.dbgwrite("Fan start level {} reached({}deg)".format(self.fanconfig.fan_startlevel, temp))
+									self.setfandutycycle(0)
+									self.fan_started = False
+									self.fan_started_cooldown = False
 
-							dtindex = index
-
-							if has_variablespeeds:
-								# Set the speed to the corresponding
-								# variable-fan-speed of the current
-								# temperature-control-point
-								speed = self.fanconfig.variable_speeds[dtindex]
-							elif has_constantspeed:
-								# Set the fan-speed to constant
-								speed = self.fanconfig.constant_speed
+								# Reset CP-cooldown-ticker. So either
+								# the fan was stopped above or it runs for
+								# another CP-cooldown-ticker round
+								self.fan_cooldown_intervals_ticked = 0
 							else:
-								# Set speed to the corresponding
-								# procentual value of the
-								# temperature-control-point
-								speed = ((dtindex + 1) * 100) / float(len(self.fanconfig.temp_thresholds))
+								# Advance the CP-interval
+								self.fan_cooldown_intervals_ticked += 1
+						else:
+							# ---------- CP-Cooldown-Mode is used
 
-							self.setfandutycycle(speed)
-							self.fan_started = True
+							current_time = time()
+							seconds_passed = int(current_time - self.fan_cooldown_time_started)
+							self.dbgwrite("Current timer-cooldown seconds passed={}".format(seconds_passed))
+
+							if seconds_passed >= self.fanconfig.fan_cooldown_time:
+								# Fan-cooldown-time has elapsed
+
+								if soctemp < self.fanconfig.temp_thresholds[self.fanconfig.fanstartlevel]:
+									# Stop fan because current temperature is
+									# below the fan-startlevel-temperature again
+									self.setfandutycycle(0)
+									self.fan_started = False
+									self.fan_started_cooldown = False
+
+								# Reset cooldown-timer. So either the fan
+								# was stopped above or it runs for another
+								# cooldown-timer-round
+								self.fan_cooldown_time_started = current_time
+				else:
+					# Fan isn't running so determine if the
+					# socket temperature reached one of the
+					# temperature-control-points
+					for index, temp in enumerate(self.fanconfig.temp_thresholds):
+						if soctemp >= temp:
+							if index >= self.fanconfig.fanstartlevel:
+								# The fan should be started if the
+								# socket-temperature exeeds the
+								# temperature-control-point
+								self.dbgwrite("Fan start level {} reached({}deg)".format(
+									self.fanconfig.fanstartlevel,
+									temp
+								))
+								dtindex = index
+
+								if has_variablespeeds:
+									# Set the speed to the corresponding
+									# variable-fan-speed of the current
+									# temperature-control-point
+									speed = self.fanconfig.variable_speeds[dtindex]
+								elif has_constantspeed:
+									# Set the fan-speed to constant
+									speed = self.fanconfig.constant_speed
+								else:
+									# Set speed to the corresponding
+									# procentual value of the
+									# temperature-control-point
+									speed = ((dtindex + 1) * 100) / float(len(self.fanconfig.temp_thresholds))
+
+								self.setfandutycycle(speed)
+								self.fan_started = True
+		except:
+			import traceback
+			self.dbgwrite(traceback.format_exc())
+		finally:
+			try:
+				# self.thread.stopevent.set()
+				self.dbgwrite("Exiting app")
+				self.destroy_fan()
+				self.fanconfig.logger.close()
+			except:
+				import traceback
+				self.dbgwrite(traceback.format_exc())
+				exit(1)
+			else:
+				exit(0)

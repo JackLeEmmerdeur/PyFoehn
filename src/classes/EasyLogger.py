@@ -12,9 +12,10 @@ class EasyLogger:
 		self._logger.setLevel(logging.DEBUG)
 		self._logger.propagate = False
 
-		self._fhf = logging.FileHandler(file, "w")
-		self._fhf.setLevel(logging.DEBUG)
-		self._logger.addHandler(self._fhf)
+		if file is not None:
+			self._fhf = logging.FileHandler(file, "w")
+			self._fhf.setLevel(logging.DEBUG)
+			self._logger.addHandler(self._fhf)
 
 		if use_console_too is True:
 			self._fhc = logging.StreamHandler(stdout)
@@ -25,7 +26,6 @@ class EasyLogger:
 		handlers = self._logger.handlers[:]
 		for handler in handlers:
 			handler.close()
-			self._logger.removeHandler(handler)
 
 	def getfhf(self):
 		return self._fhf

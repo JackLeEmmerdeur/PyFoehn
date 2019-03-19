@@ -3,6 +3,7 @@ from threading import Event
 from src.classes.FanThread import FanThread
 from src.lib.helpers import get_reformatted_exception
 from src.classes.FanConfig import FanConfig
+from time import sleep
 
 
 class App:
@@ -25,11 +26,16 @@ class App:
 			self.stopevent
 		)
 
-	def exitapp(self):
-		self.dbgwrite("Exiting app")
-		self.thread.destroy_fan()
-		self.logger.close()
-		sys.exit(0)
+	# def exitapp(self):
+	# 	try:
+	# 		self.thread.stopevent.set()
+	# 		self.dbgwrite("Exiting app")
+	# 		self.thread.destroy_fan()
+	# 		self.fanconfig.logger.close()
+	# 	except:
+	# 		import traceback
+	# 		self.dbgwrite(traceback.format_exc())
+	# 	sys.exit()
 
 	def dbgwrite(self, msg):
 		self.fanconfig.dbgwrite(msg)
@@ -38,10 +44,12 @@ class App:
 		try:
 			self.thread.run()
 		except KeyboardInterrupt as e:
-			self.exitapp()
+			# self.exitapp()
+			self.stopevent.set()
 		except Exception as e:
 			get_reformatted_exception("", e)
-			self.exitapp()
+			# self.exitapp()
+			self.stopevent.set()
 		finally:
 			pass
 

@@ -1,9 +1,9 @@
 {
   "general": {
 	"profile": "profile_1",
-	"foreground": false,
-	"logconsole": false,
-	"logfile": false,
+	"foreground": true,
+	"logconsole": true,
+	"logfile": true,
 	"loggername": "PyFoehn"
   },
   "hardware": {
@@ -16,8 +16,8 @@
 	"interval": 2,
 	"fanstartlevel": 1,
 	"fancooldown": "35sec",
-	"_constant_speed": 100,
-	"variable_speeds": [
+	"constant_speed": 100,
+	"_variable_speeds": [
 	  30,
 	  40,
 	  75,
