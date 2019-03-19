@@ -1,0 +1,11 @@
+[Unit]
+Description=Uses a python-script utilizing PWM to drive a fan in relation to the current socket temperature
+
+[Service]
+WorkingDirectory=/home/pi/RetroPie/retropiemenu/PyFoehn
+User=pi
+Type=simple
+ExecStart=/usr/bin/python foehn.py
+
+[Install]
+WantedBy=multi-user.target
