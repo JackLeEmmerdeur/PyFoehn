@@ -13,7 +13,6 @@ class FanThread(Thread):
 	fanconfig = None
 	""":type: FanConfig"""
 
-	keep_fds = None
 	stopevent = None
 	""":type: Event"""
 	stopevent_signaled = True
@@ -29,12 +28,10 @@ class FanThread(Thread):
 	def __init__(
 		self,
 		fanconfig,
-		keep_fds,
 		stopevent
 	):
 		Thread.__init__(self)
 		self.fanconfig = fanconfig
-		self.keep_fds = keep_fds
 		self.stopevent = stopevent
 		self.pi = runs_on_pi()
 
