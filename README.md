@@ -20,6 +20,7 @@ Install the service-file:
 * Copy pyfoehn.service to /etc/systemd/system
 * cd /etc/systemd/system
 * sudo systemctl enable pyfoehn.service
+* If the service won't start consult the file /var/log/daemon.log
 
 The service will be started on every boot.
 
