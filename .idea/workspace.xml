@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="">
+    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="Daemonize functionality bugfree, create systemd unit now">
+      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/App.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/App.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/FanHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/FanThread.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanThread.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foehn.py" beforeDir="false" afterPath="$PROJECT_DIR$/foehn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_deamon.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,56 +19,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FanConfig.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/classes/FanConfig.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/classes/App.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" selection-start-line="33" selection-end-line="34" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FanHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/classes/FanHandler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FanThread.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/classes/FanThread.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/classes/Config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="50" selection-start-column="50" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EasyLogger.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/classes/EasyLogger.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="39" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="39" />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="408">
+                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              </first_editor>
+              <second_editor>
+                <markdownNavigatorState />
+              </second_editor>
             </state>
           </provider>
         </entry>
@@ -84,14 +44,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>is_dic</find>
-      <find>parse</find>
-      <find>int</find>
-      <find>int_</find>
-      <find>_int</find>
-      <find>&quot;</find>
-      <find>is_uni</find>
-      <find>is_in</find>
       <find>gpio</find>
       <find>string_</find>
       <find>dbg</find>
@@ -114,6 +66,14 @@
       <find>write(</find>
       <find>self.fan</find>
       <find>self.tem</find>
+      <find>logger</find>
+      <find>self.lo</find>
+      <find>fan_star</find>
+      <find>fan_startle</find>
+      <find>No handlers</find>
+      <find>exitapp</find>
+      <find>fan_cooldown_interval</find>
+      <find>fan_cooldown_time</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -141,25 +101,27 @@
         <option value="$PROJECT_DIR$/FanThread.py" />
         <option value="$PROJECT_DIR$/test_deamon.py" />
         <option value="$PROJECT_DIR$/src/App.py" />
-        <option value="$PROJECT_DIR$/tmp.py" />
-        <option value="$PROJECT_DIR$/src/classes/EasyLogger.py" />
-        <option value="$PROJECT_DIR$/foehn.py" />
         <option value="$PROJECT_DIR$/src/classes/FanConfiguration.py" />
         <option value="$PROJECT_DIR$/src/lib/helpers.py" />
-        <option value="$PROJECT_DIR$/src/classes/App.py" />
-        <option value="$PROJECT_DIR$/config/config.json" />
-        <option value="$PROJECT_DIR$/src/classes/FanThread.py" />
-        <option value="$PROJECT_DIR$/src/classes/FanConfig.py" />
         <option value="$PROJECT_DIR$/src/classes/Config.py" />
         <option value="$PROJECT_DIR$/src/classes/FanHandler.py" />
+        <option value="$PROJECT_DIR$/src/classes/EasyLogger.py" />
+        <option value="$PROJECT_DIR$/src/classes/App.py" />
+        <option value="$PROJECT_DIR$/src/classes/FanConfig.py" />
+        <option value="$PROJECT_DIR$/src/classes/FanThread.py" />
+        <option value="$PROJECT_DIR$/config/config.json" />
+        <option value="$PROJECT_DIR$/foehn.py" />
+        <option value="$PROJECT_DIR$/tmp.py" />
+        <option value="$PROJECT_DIR$/pyfoehn.service" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="59" />
+    <option name="x" value="56" />
     <option name="y" value="58" />
-    <option name="width" value="1260" />
-    <option name="height" value="555" />
+    <option name="width" value="1256" />
+    <option name="height" value="556" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -167,7 +129,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -180,32 +141,16 @@
               <item name="PyFanControl" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="PyFanControl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PyFanControl" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PyFanControl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PyFanControl" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PyFanControl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PyFanControl" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -371,26 +316,40 @@
       <option name="project" value="LOCAL" />
       <updated>1552862460371</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Refactoring, not tested">
+      <created>1552933563558</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1552933563558</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Daemonize functionality bugfree, create systemd unit now">
+      <created>1552960124541</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1552960124541</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="38" y="0" width="1325" height="771" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16148597" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18574677" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32867134" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -400,21 +359,21 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.102623455" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -433,46 +392,28 @@
     <MESSAGE value="Testing deamonize library" />
     <MESSAGE value="Implementing deamonize library" />
     <MESSAGE value="Foreground-Modus runs Background segfaults on pi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Foreground-Modus runs Background segfaults on pi" />
+    <MESSAGE value="Refactoring, not tested" />
+    <MESSAGE value="Daemonize functionality bugfree, create systemd unit now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Daemonize functionality bugfree, create systemd unit now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/foehn.py</url>
-          <line>19</line>
+          <line>27</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/classes/FanConfig.py</url>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/src/classes/FanThread.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/FanThread.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foehn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3179">
-          <caret line="187" column="63" selection-start-line="187" selection-start-column="48" selection-end-line="187" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -690,31 +631,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/funcs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_deamon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test_deamon.py" />
     <entry file="file:///usr/local/lib/python3.5/dist-packages/daemonize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
           <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1252">
-          <caret line="284" column="18" selection-start-line="284" selection-start-column="7" selection-end-line="284" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -732,13 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3.5/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1889">
-          <caret line="735" column="6" selection-start-line="735" selection-start-column="6" selection-end-line="735" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/daemon/daemon.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6834">
@@ -746,66 +660,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/foehn.py">
+    <entry file="file://$PROJECT_DIR$/src/lib/funcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        <state relative-caret-position="187">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.json">
+    <entry file="file:///usr/lib/python3.5/pdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="20" />
+        <state relative-caret-position="229">
+          <caret line="1586" column="4" selection-start-line="1586" selection-start-column="4" selection-end-line="1586" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/App.py">
+    <entry file="file:///usr/lib/python3.5/threading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" selection-start-line="33" selection-end-line="34" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/Config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="50" selection-start-column="50" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/EasyLogger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="39" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/FanConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+        <state relative-caret-position="178">
+          <caret line="520" column="20" lean-forward="true" selection-start-line="520" selection-start-column="20" selection-end-line="520" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/classes/FanHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="-340">
           <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/classes/FanThread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+        <state relative-caret-position="168">
+          <caret line="186" column="56" selection-start-line="186" selection-start-column="56" selection-end-line="186" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/EasyLogger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="49" lean-forward="true" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/App.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/FanConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/foehn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp.py" />
+    <entry file="file://$PROJECT_DIR$/pyfoehn.service">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="408">
+            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
         </state>
       </provider>
     </entry>

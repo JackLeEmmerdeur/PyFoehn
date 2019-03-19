@@ -3,11 +3,18 @@ from src.lib.helpers import get_reformatted_exception, file_exists, is_boolean
 from daemon import DaemonContext
 import signal
 import lockfile
+from os import getcwd
+from os.path import join
 
 appname = "PyFoehn"
 
-app = App("config/config.json", appname)
 
+cfgfile = join(getcwd(), "config/config.json")
+
+with open("/tmp/dodod", "w") as f:
+	f.write(cfgfile)
+
+app = App(cfgfile, appname)
 
 def signal_handler(sig, frame):
 	print("Program exits")
