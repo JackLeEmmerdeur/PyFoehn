@@ -8,11 +8,13 @@ def runs_on_pi():
 
 def get_soctemp(is_pi=True):
 	if is_pi is True:
-		p1 = subprocess.call(["cat", "/sys/class/thermal/thermal_zone0/temp"])
-
-		# if tempval[0] == 0:
-		# 	temp = round(float(tempval[1]) / 1000, 2)
-		return 0
+		p = subprocess.Popen(["cat", "/sys/class/thermal/thermal_zone0/temp"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		output, err = p.communicate()
+		if p.returncode == 0:
+			temp = round(float(output) / 1000, 2)
+		else:
+			raise Exception(err)
+		return temp
 	else:
 		from codecs import decode
 		p1 = subprocess.Popen(["sensors"], stdout=subprocess.PIPE)
