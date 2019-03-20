@@ -1,5 +1,5 @@
 from platform import machine
-import plumbum
+import subprocess
 
 
 def runs_on_pi():
@@ -7,25 +7,17 @@ def runs_on_pi():
 
 
 def get_soctemp(is_pi=True):
-
-	temp = -1
-
 	if is_pi is True:
-		catcmd = plumbum.local["cat"]
-		tempval = catcmd.run("/sys/class/thermal/thermal_zone0/temp")
+		p1 = subprocess.call(["cat", "/sys/class/thermal/thermal_zone0/temp"])
 
-		if tempval[0] == 0:
-			temp = round(float(tempval[1]) / 1000, 2)
-
+		# if tempval[0] == 0:
+		# 	temp = round(float(tempval[1]) / 1000, 2)
+		return 0
 	else:
-		sensors = plumbum.local["sensors"]
-		grep = plumbum.local["grep"]
-		cut = plumbum.local["cut"]
-
-		tempgetter = sensors | grep["temp2", "-m1"] | cut["-c16-19"]
-		tempval = tempgetter.run()
-
-		if tempval[0] == 0:
-			temp = float(tempval[1])
-
-	return temp
+		from codecs import decode
+		p1 = subprocess.Popen(["sensors"], stdout=subprocess.PIPE)
+		p2 = subprocess.Popen(["grep", "temp2", "-m1"], stdin=p1.stdout, stdout=subprocess.PIPE)
+		p1.stdout.close()
+		p3 = subprocess.Popen(["cut", "-c16-19"], stdin=p2.stdout, stdout=subprocess.PIPE)
+		p2.stdout.close()
+		return float(decode(p3.communicate()[0]))
