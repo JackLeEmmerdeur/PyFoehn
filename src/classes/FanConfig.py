@@ -11,12 +11,13 @@ class FanConfig:
 	dbg = False
 	gpio = None
 	disablefan = False
+	interval = None
+	fanstartlevel = None
 	temp_thresholds = None
 	variable_speeds = None
 	constant_speed = None
 	fan_cooldown_interval = None
 	fan_cooldown_time = None
-	interval = None
 
 	def __init__(self, configfile, appname):
 
@@ -53,7 +54,7 @@ class FanConfig:
 			temp_thresholds = profile_temp_thresholds
 
 		if temp_thresholds is None:
-			self.temp_thresholds = parse_sequence_str("[54,59,74,80]")
+			self.temp_thresholds = parse_sequence_str("[54,59,74,80]", lambda x: int(x))
 		else:
 			self.temp_thresholds = temp_thresholds
 

@@ -21,8 +21,23 @@ def is_unicode(obj):
 	return isinstance(obj, text_type)
 
 
-def parse_sequence_str(seqstr):
-	list(map(lambda x: int(x), findall('\d+', seqstr)))
+def parse_multi_dim_sequence_str(multi_dim_sequence, mapfunc):
+	seq = []
+	subseqstrs = findall('\[\d*,\s?\d*\]', multi_dim_sequence)
+	for subseqstr in subseqstrs:
+		subseq = findall('\d+', subseqstr)
+		if mapfunc is not None:
+			seq.append(mapfunc(subseq))
+		else:
+			seq.append(subseq)
+	return seq
+
+
+def parse_sequence_str(seqstr, mapfunc=None):
+	seqs = findall('\d+', seqstr)
+	if mapfunc is not None:
+		seqs = list(map(lambda x: mapfunc(x), seqs))
+	return seqs
 
 
 def is_sequence(var):
