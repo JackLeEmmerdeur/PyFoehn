@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="corrected version; todo: add service installation code in setup.py">
-      <change afterPath="$PROJECT_DIR$/HISTORY" afterDir="false" />
+    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="history/todo file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -356,12 +355,18 @@
       <option name="project" value="LOCAL" />
       <updated>1582581398721</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="history/todo file">
+      <created>1582581788293</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1582581788293</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="initial source" />
     <MESSAGE value="pycharm project folder" />
     <MESSAGE value="general helper lib" />
     <MESSAGE value="gitignore" />
@@ -386,25 +391,26 @@
     <MESSAGE value="todo: add setup.py" />
     <MESSAGE value="added setup.py and a missing file" />
     <MESSAGE value="corrected version; todo: add service installation code in setup.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected version; todo: add service installation code in setup.py" />
+    <MESSAGE value="history/todo file" />
+    <option name="LAST_COMMIT_MESSAGE" value="history/todo file" />
   </component>
   <component name="WindowStateProjectService">
     <state x="699" y="324" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582581416663">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
     <state x="699" y="324" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581416663" />
-    <state x="525" y="114" key="CommitChangelistDialog2" timestamp="1582581398666">
+    <state x="525" y="114" key="CommitChangelistDialog2" timestamp="1582581788218">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
-    <state x="525" y="114" key="CommitChangelistDialog2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581398666" />
+    <state x="525" y="114" key="CommitChangelistDialog2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581788218" />
     <state x="744" y="279" key="FileChooserDialogImpl" timestamp="1582577936223">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
     <state x="744" y="279" key="FileChooserDialogImpl/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582577936223" />
-    <state x="556" y="255" key="Vcs.Push.Dialog.v2" timestamp="1582581278723">
+    <state x="556" y="255" key="Vcs.Push.Dialog.v2" timestamp="1582581795595">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
-    <state x="556" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581278723" />
+    <state x="556" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581795595" />
     <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1582581574582">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
