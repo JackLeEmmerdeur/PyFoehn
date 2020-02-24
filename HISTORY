@@ -1,0 +1,17 @@
+============
+=   ToDo:  =
+============
+- Write Documentation for config/config.json.
+- Write service installation code in setup.py.
+- Test setup.py on Raspberry.
+- Create Fritzing Diagram for wiring GPIO to fan.
+
+
+
+============
+= History: =
+============
+
+0.5.0 Alpha:
+
+Fully functional code with working System D service
