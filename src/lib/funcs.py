@@ -3,7 +3,8 @@ import subprocess
 
 
 def runs_on_pi():
-	return machine().find("armv") > -1
+	test = machine()
+	return test.find("armv") > -1 or test.find("aarch") > -1
 
 
 def get_soctemp(logger, is_pi=True):

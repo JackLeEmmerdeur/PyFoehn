@@ -5,13 +5,6 @@ import signal
 import lockfile
 from os import getcwd
 from os.path import join
-import ptvsd
-
-# Allow other computers to attach to ptvsd at this IP address and port.
-ptvsd.enable_attach(address=('192.168.178.46', 58001), redirect_output=True)
-
-# Pause the program until a remote debugger is attached
-ptvsd.wait_for_attach()
 
 appname = "PyFoehn"
 

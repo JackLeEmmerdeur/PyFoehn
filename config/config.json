@@ -1,7 +1,7 @@
 {
   "general": {
 	"profile": "profile_1",
-	"foreground": false,
+	"foreground": true,
 	"logconsole": false,
 	"logfile": true,
 	"loggername": "PyFoehn"

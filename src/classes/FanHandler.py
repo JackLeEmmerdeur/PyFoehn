@@ -3,6 +3,12 @@ from src.classes.FanConfig import FanConfig
 from src.lib.funcs import runs_on_pi
 from src.lib.helpers import is_integer
 
+# # Remote debugging via vscode
+# import ptvsd
+# # Allow other computers to attach to ptvsd at this IP address and port.
+# ptvsd.enable_attach(address=('192.168.178.46', 58001), redirect_output=True)
+# # Pause the program until a remote debugger is attached
+# ptvsd.wait_for_attach()
 
 pi = runs_on_pi()
 
