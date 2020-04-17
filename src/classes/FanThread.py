@@ -10,13 +10,16 @@ from sys import exit
 
 class FanThread(Thread):
 	fan = None
+
 	fanconfig = None
 	""":type: FanConfig"""
 
 	stopevent = None
 	""":type: Event"""
+
 	stopevent_signaled = True
 	""":type: boolean"""
+
 	pi = None
 
 	fan_last_dutycycle = -1
@@ -77,7 +80,7 @@ class FanThread(Thread):
 		try:
 			while not self.stopevent.wait(self.fanconfig.interval):
 				# Stop-Signal was not send yet, e.g. via CTRL-C
-				soctemp = get_soctemp(self.pi)
+				soctemp = get_soctemp(self.fanconfig.logger, self.pi)
 
 				self.dbgwrite("Current Socket temperature={}".format(soctemp))
 

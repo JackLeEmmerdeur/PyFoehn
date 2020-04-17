@@ -4,7 +4,7 @@ from setuptools import setup
 
 ir = [
 	'RPi.GPIO >= 0.7.0',
-	'python - daemon >= 2.2.4'
+	'python-daemon >= 2.2.4'
 ]
 
 setup(

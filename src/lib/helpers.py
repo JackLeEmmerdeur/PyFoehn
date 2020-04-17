@@ -3,6 +3,7 @@ from six import string_types, text_type
 from re import findall
 from sys import exc_info
 from traceback import format_exception
+import os
 
 
 def is_string(var):
@@ -19,6 +20,14 @@ def is_boolean(var):
 
 def is_unicode(obj):
 	return isinstance(obj, text_type)
+
+
+def get_current_pyfiledir():
+	return os.path.dirname(os.path.realpath(__file__))
+
+
+def get_current_workingdir():
+	return os.getcwd()
 
 
 def parse_multi_dim_sequence_str(multi_dim_sequence, mapfunc):

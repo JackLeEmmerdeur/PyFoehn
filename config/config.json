@@ -12,10 +12,10 @@
   },
   "profile_1": {
   	"debug": true,
-	"freq": 150,
-	"interval": 2,
+	"freq": 80,
+	"interval": 5,
 	"fanstartlevel": 1,
-	"fancooldown": "35sec",
+	"fancooldown": "18sec",
 	"constant_speed": 100,
 	"_variable_speeds": [
 	  30,
@@ -24,10 +24,10 @@
 	  100
 	],
 	"temp_thresholds": [
-	  45,
 	  57,
-	  62,
-	  75
+	  60,
+	  65,
+	  72
 	]
   }
 }

@@ -1,6 +1,8 @@
 from src.classes.Config import Config
 from src.classes.EasyLogger import EasyLogger
 from src.lib.helpers import is_boolean, is_integer, is_sequence, parse_sequence_str, string_is_empty
+from src.lib.helpers import get_current_pyfiledir, get_current_workingdir
+from pathlib import Path
 
 
 class FanConfig:
@@ -38,9 +40,14 @@ class FanConfig:
 
 		self.gpio = gpio
 
+		logpath = Path(get_current_workingdir())
+
+		if self.logfile:
+			logpath = logpath.joinpath("log", self.loggername + ".log")
+
 		self.logger = EasyLogger(
 			self.logconsole,
-			"/tmp/" + self.loggername + ".log" if self.logfile is True else None,
+			str(logpath) if self.logfile is True else None,
 			self.loggername
 		)
 

@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="history/todo file">
+    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="itsa meee workspace">
+      <change beforePath="$PROJECT_DIR$/.idea/PyFanControl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyFanControl.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/FanConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanConfig.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/FanThread.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanThread.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/funcs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/helpers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,46 +23,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>FanHand</find>
-      <find>self.logger</find>
-      <find>config_re</find>
-      <find>Config(</find>
-      <find>self.config</find>
-      <find>sdfafasd</find>
-      <find>.err</find>
-      <find>is_bo</find>
-      <find>exception</find>
-      <find>except</find>
-      <find>file_Ex</find>
-      <find>def file_e</find>
-      <find>is_fi</find>
-      <find>FileHandl</find>
-      <find>dbgwrite(&quot;1</find>
-      <find>write(</find>
-      <find>self.fan</find>
-      <find>self.tem</find>
-      <find>logger</find>
-      <find>self.lo</find>
-      <find>fan_star</find>
-      <find>fan_startle</find>
-      <find>No handlers</find>
-      <find>exitapp</find>
-      <find>fan_cooldown_interval</find>
-      <find>fan_cooldown_time</find>
-      <find>parse_sequence_str</find>
-      <find>empty</find>
-      <find>is_boolean</find>
-      <find>check_int_ranges</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-    </replaceStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,8 +43,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../BackTheFooUp" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -362,12 +331,18 @@
       <option name="project" value="LOCAL" />
       <updated>1582581788293</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="itsa meee workspace">
+      <created>1582582452126</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1582582452126</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="pycharm project folder" />
     <MESSAGE value="general helper lib" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="added comments to the most important method in the application" />
@@ -392,25 +367,35 @@
     <MESSAGE value="added setup.py and a missing file" />
     <MESSAGE value="corrected version; todo: add service installation code in setup.py" />
     <MESSAGE value="history/todo file" />
-    <option name="LAST_COMMIT_MESSAGE" value="history/todo file" />
+    <MESSAGE value="itsa meee workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="itsa meee workspace" />
   </component>
   <component name="WindowStateProjectService">
     <state x="699" y="324" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582581416663">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
     <state x="699" y="324" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581416663" />
-    <state x="525" y="114" key="CommitChangelistDialog2" timestamp="1582581788218">
+    <state x="525" y="114" key="CommitChangelistDialog2" timestamp="1582582452074">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
-    <state x="525" y="114" key="CommitChangelistDialog2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581788218" />
-    <state x="744" y="279" key="FileChooserDialogImpl" timestamp="1582577936223">
+    <state x="525" y="114" key="CommitChangelistDialog2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582582452074" />
+    <state x="744" y="279" width="432" height="487" key="FileChooserDialogImpl" timestamp="1582940751156">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
-    <state x="744" y="279" key="FileChooserDialogImpl/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582577936223" />
-    <state x="556" y="255" key="Vcs.Push.Dialog.v2" timestamp="1582581795595">
+    <state x="744" y="279" width="432" height="487" key="FileChooserDialogImpl/0.0.1920.1042/1920.0.1680.1050@0.0.1920.1042" timestamp="1582640428144" />
+    <state x="744" y="279" key="FileChooserDialogImpl/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582940751156" />
+    <state x="616" y="55" key="SettingsEditor" timestamp="1587084412831">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
-    <state x="556" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582581795595" />
+    <state x="616" y="55" key="SettingsEditor/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1587084412831" />
+    <state x="556" y="255" key="Vcs.Push.Dialog.v2" timestamp="1582582461706">
+      <screen x="0" y="0" width="1920" height="1042" />
+    </state>
+    <state x="556" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582582461706" />
+    <state x="637" y="254" width="645" height="538" key="find.popup" timestamp="1587086511739">
+      <screen x="0" y="0" width="1920" height="1042" />
+    </state>
+    <state x="637" y="254" width="645" height="538" key="find.popup/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1587086511739" />
     <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1582581574582">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
