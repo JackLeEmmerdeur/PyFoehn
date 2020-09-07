@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="itsa meee workspace">
-      <change beforePath="$PROJECT_DIR$/.idea/PyFanControl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyFanControl.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/FanConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanConfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/FanThread.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FanThread.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/funcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/helpers.py" afterDir="false" />
-    </list>
+    <list default="true" id="1bbe0d16-b047-4539-a805-2a315a14889e" name="Default" comment="itsa meee workspace" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +34,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.local/share/rhythmbox/plugins" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -379,11 +369,11 @@
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
     <state x="525" y="114" key="CommitChangelistDialog2/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582582452074" />
-    <state x="744" y="279" width="432" height="487" key="FileChooserDialogImpl" timestamp="1582940751156">
+    <state x="744" y="279" width="432" height="487" key="FileChooserDialogImpl" timestamp="1589816065355">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
     <state x="744" y="279" width="432" height="487" key="FileChooserDialogImpl/0.0.1920.1042/1920.0.1680.1050@0.0.1920.1042" timestamp="1582640428144" />
-    <state x="744" y="279" key="FileChooserDialogImpl/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1582940751156" />
+    <state x="744" y="279" width="432" height="487" key="FileChooserDialogImpl/0.0.1920.1042/1920.30.1680.1050@0.0.1920.1042" timestamp="1589816065355" />
     <state x="616" y="55" key="SettingsEditor" timestamp="1587084412831">
       <screen x="0" y="0" width="1920" height="1042" />
     </state>
