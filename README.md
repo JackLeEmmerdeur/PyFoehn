@@ -1,6 +1,6 @@
 ## PyFoehn
 
-#### Application use case
+#### Description
 
 A 2-pin fan for a Raspberry Pi can be put on the ground and the 5V pin to let it run constantly.
 
