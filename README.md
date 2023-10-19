@@ -1,3 +1,20 @@
+## PyFoehn
+
+#### Application use case
+
+A 2-pin fan for a Raspberry Pi can be put on the ground and the 5V pin to let it run constantly.
+
+The PyFoehn service allows to use PWM with a [2-pin fan](https://www.amazon.com/-/de/dp/B07RZF5W75) instead of a [4-pin smart fan](https://www.amazon.com/dp/B07DXRNYNX).
+
+The service needs a small circut containing a resistor, transistor and a capacitator which fit on a 1x2cm breadboard.
+
+I may upload the layout for the circuit when someone opens an respective issue, though...
+
+...all in all this solution is outdated and I'd advise to just invest a few bucks more and buy a 4-pin fan and use [smaRSt-fan](https://medium.com/@olilay/how-to-keep-your-raspberry-pi-cool-and-quiet-with-a-smart-fan-ecd15f4dbf7b) / (github: [link](https://github.com/OliLay/smaRSt-fan)) without needing any extra breadboard or pcb circuit. 
+
+
+## Installation
+
 #### Copy the script folder to the Raspberry
 In my case it was a retropie-system, so I copied the  
 foehn.py-file, the config-folder and the src-folder  
