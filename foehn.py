@@ -1,8 +1,6 @@
 from src.classes.App import App
 from src.lib.helpers import get_reformatted_exception, file_exists, is_boolean
-from daemon import DaemonContext
 import signal
-import lockfile
 from os import getcwd
 from os.path import join
 
@@ -12,11 +10,14 @@ cfgfile = join(getcwd(), "config/config.json")
 
 app = App(cfgfile, appname)
 
+with_daemon_context = True
+
 
 def signal_handler(sig, frame):
 	print("Program exits")
 	global app
-	# app.exitapp()
+	if with_daemon_context:
+		app.exitapp()
 	app.stopevent.set()
 
 
@@ -46,15 +47,20 @@ if __name__ == "__main__":
 			if fdc is not None:
 				consoleout = fdc.stream
 
-			with DaemonContext(
-				signal_map={
-					signal.SIGTERM: signal_handler,
-					signal.SIGINT: signal_handler
-				},
-				pidfile=lockfile.FileLock(pidfile),
-				files_preserve=keep_fds,
-				stdout=consoleout
-			):
-				app.run()
+			if with_daemon_context:
+				from daemon import DaemonContext
+				import lockfile
+
+				with DaemonContext(
+					signal_map={
+						signal.SIGTERM: signal_handler,
+						signal.SIGINT: signal_handler
+					},
+					pidfile=lockfile.FileLock(pidfile),
+					files_preserve=keep_fds,
+					stdout=consoleout
+				):
+
+			app.run()
 	except Exception as e:
-		print(get_reformatted_exception("bla", e))
+		print(get_reformatted_exception("Error", e))
